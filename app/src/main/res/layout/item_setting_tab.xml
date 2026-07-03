@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_tab_item"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="@drawable/bg_setting_tab_selector"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="24dp"
+    android:paddingEnd="16dp">
+
+    <ImageView
+        android:id="@+id/iv_tab_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="Tab Icon" /> <!-- 针对无障碍服务的描述 -->
+
+    <TextView
+        android:id="@+id/tv_tab_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="网络连接"
+        android:textColor="@color/text_setting_tab_selector"
+        android:textSize="20sp" />
+
+
+</LinearLayout>

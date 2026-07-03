@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TestCarSettings</string>
+    <string name="network_fragment">Hello network fragment</string>
+    <string name="sound_fragment">Hello sound fragment</string>
+    <string name="display_fragment">Hello display fragment</string>
+    <string name="vehicle_fragment">Hello vehicle fragment</string>
+    <string name="adas_fragment">Hello adas fragment</string>
+    <string name="system_fragment">Hello system fragment</string>
+    <string name="test_fragment">Hello test fragment</string>
+
 </resources>
