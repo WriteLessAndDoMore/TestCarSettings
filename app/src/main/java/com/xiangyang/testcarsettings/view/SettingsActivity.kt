@@ -30,8 +30,8 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding, SettingsActivityT
     override fun inflateBinding(inflater: LayoutInflater) =
         ActivitySettingsBinding.inflate(inflater)
 
-    override fun initViewModel(): SettingsActivityTabTypeViewModel
-    = ViewModelProvider(this)[SettingsActivityTabTypeViewModel::class.java]
+    override fun initViewModel(): SettingsActivityTabTypeViewModel =
+        ViewModelProvider(this)[SettingsActivityTabTypeViewModel::class.java]
 
     override fun initView() {
         // 绑定左侧 Tab 点击事件
@@ -73,17 +73,24 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding, SettingsActivityT
         // 获取或创建目标
         var targetFragment = fragments[tabType]
         if (targetFragment == null) {
-            targetFragment = when (tabType) {
-                TabType.NETWORK -> NetworkFragment()
-                TabType.SOUND -> SoundFragment()
-                TabType.DISPLAY -> DisplayFragment()
-                TabType.VEHICLE -> VehicleFragment()
-                TabType.ADAS -> AdasFragment()
-                TabType.SYSTEM -> SystemFragment()
-                TabType.TEST -> TestFragment()
+            val existingFragment = supportFragmentManager.findFragmentByTag(tabType.name)
+            if (existingFragment != null) {
+                targetFragment = existingFragment
+                fragments[tabType] = existingFragment
+                fragmentTransaction.show(existingFragment)
+            } else {
+                targetFragment = when (tabType) {
+                    TabType.NETWORK -> NetworkFragment()
+                    TabType.SOUND -> SoundFragment()
+                    TabType.DISPLAY -> DisplayFragment()
+                    TabType.VEHICLE -> VehicleFragment()
+                    TabType.ADAS -> AdasFragment()
+                    TabType.SYSTEM -> SystemFragment()
+                    TabType.TEST -> TestFragment()
+                }
+                fragments[tabType] = targetFragment
+                fragmentTransaction.add(R.id.fragment_container, targetFragment, tabType.name)
             }
-            fragments[tabType] = targetFragment
-            fragmentTransaction.add(R.id.fragment_container, targetFragment, tabType.name)
         } else {
             // 缓存命中的话，直接通知底层改VISIBLE状态，实现秒开重绘
             fragmentTransaction.show(targetFragment)
